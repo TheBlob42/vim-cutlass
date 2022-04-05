@@ -1,2 +1,4 @@
 cutlass	cutlass.txt	/*cutlass*
+cutlass-configuration	cutlass.txt	/*cutlass-configuration*
 cutlass.txt	cutlass.txt	/*cutlass.txt*
+g:CutlassRecursiveSelectBindings	cutlass.txt	/*g:CutlassRecursiveSelectBindings*

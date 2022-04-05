@@ -33,4 +33,14 @@ See this article (http://vimcasts.org/blog/2013/11/registers-the-good-the-bad-an
 
 Based off of vim-easyclip (https://github.com/svermeulen/vim-easyclip) and also Drew Neil's ideas (https://github.com/nelstrom/vim-cutlass) (as well as the name)
 
+CONFIGURATION                     *cutlass-configuration*
+
+*g:CutlassRecursiveSelectBindings* (default: `0`)
+    Set to `1` to make the keybindings in selection mode recursive. This might
+    be helpful for the usage with "autopair" plugins etc. which otherwise
+    would not trigger.
+
+*g:CutlassOverrideDefaults* (default: 1)
+    Set to `0` if you want to call this manually at a time of your chossing.
+
  vim:tw=78:ts=8:ft=help:norl:

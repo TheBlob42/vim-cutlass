@@ -1,5 +1,6 @@
 
 function! cutlass#overrideSelectBindings()
+    let recursive = get(g:, 'CutlassRecursiveSelectBindings', 0)
     let i = 33
 
     " Add a map for every printable character to copy to black hole register
@@ -10,15 +11,15 @@ function! cutlass#overrideSelectBindings()
             if i ==# 92
               let char = '\\'
             endif
-            exec 'snoremap '. char .' <c-o>"_c'. char
+            exec 's' . (recursive ? 'map ' : 'noremap ') . char .' <c-o>"_c' . char
         endif
 
         let i = i + 1
     endwhile
 
-    snoremap <bs> <c-o>"_c
-    snoremap <space> <c-o>"_c<space>
-    snoremap \| <c-o>"_c|
+    exec 's' . (recursive ? 'map' : 'noremap') . ' <bs> <c-o>"_c'
+    exec 's' . (recursive ? 'map' : 'noremap') . ' <space> <c-o>"_c<space>'
+    exec 's' . (recursive ? 'map' : 'noremap') . ' \| <c-o>"_c|'
 endfunction
 
 function! cutlass#hasMapping(mapping, mode)
