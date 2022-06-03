@@ -1,6 +1,11 @@
 
 function! cutlass#overrideSelectBindings()
     let recursive = get(g:, 'CutlassRecursiveSelectBindings', 0)
+    let map = recursive ? 'map' : 'noremap'
+
+    " Create a non recursive 'change' mapping to avoid recursive problems with 'cn' etc.
+    exec 'snoremap <Plug>(CutlassChange) <c-o>"_c'
+
     let i = 33
 
     " Add a map for every printable character to copy to black hole register
@@ -11,15 +16,15 @@ function! cutlass#overrideSelectBindings()
             if i ==# 92
               let char = '\\'
             endif
-            exec 's' . (recursive ? 'map ' : 'noremap ') . char .' <c-o>"_c' . char
+            exec 's' . map . ' ' . char . ' <Plug>(CutlassChange)' . char
         endif
 
         let i = i + 1
     endwhile
 
-    exec 's' . (recursive ? 'map' : 'noremap') . ' <bs> <c-o>"_c'
-    exec 's' . (recursive ? 'map' : 'noremap') . ' <space> <c-o>"_c<space>'
-    exec 's' . (recursive ? 'map' : 'noremap') . ' \| <c-o>"_c|'
+    exec 's' . map . ' <bs> <Plug>(CutlassChange)'
+    exec 's' . map . ' <space> <Plug>(CutlassChange)<space>'
+    exec 's' . map . ' \| <Plug>(CutlassChange)|'
 endfunction
 
 function! cutlass#hasMapping(mapping, mode)
